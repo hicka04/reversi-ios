@@ -10,7 +10,7 @@
 		D636B39F23D35043007F370F /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636B39E23D35043007F370F /* DiskView.swift */; };
 		D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB323A9FE4500396732 /* AppDelegate.swift */; };
 		D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB523A9FE4500396732 /* SceneDelegate.swift */; };
-		D642BDB823A9FE4500396732 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB723A9FE4500396732 /* ViewController.swift */; };
+		D642BDB823A9FE4500396732 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB723A9FE4500396732 /* BoardViewController.swift */; };
 		D642BDBB23A9FE4500396732 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D642BDB923A9FE4500396732 /* Main.storyboard */; };
 		D642BDBD23A9FE4700396732 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D642BDBC23A9FE4700396732 /* Assets.xcassets */; };
 		D642BDC023A9FE4700396732 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D642BDBE23A9FE4700396732 /* LaunchScreen.storyboard */; };
@@ -35,7 +35,7 @@
 		D642BDB023A9FE4500396732 /* Reversi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reversi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D642BDB323A9FE4500396732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D642BDB523A9FE4500396732 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D642BDB723A9FE4500396732 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D642BDB723A9FE4500396732 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		D642BDBA23A9FE4500396732 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D642BDBC23A9FE4700396732 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D642BDBF23A9FE4700396732 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,22 +66,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D636B3A123D43203007F370F /* Views */ = {
+		B827AFE824530F610045C942 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B827AFE924530F6B0045C942 /* Board */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B827AFE924530F6B0045C942 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				D642BDB723A9FE4500396732 /* BoardViewController.swift */,
+				B827AFEA24530FAF0045C942 /* SubView */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		B827AFEA24530FAF0045C942 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
 				D642BDDB23AA137C00396732 /* BoardView.swift */,
 				D642BDD523AA0B3900396732 /* CellView.swift */,
 				D636B39E23D35043007F370F /* DiskView.swift */,
 			);
-			name = Views;
+			path = SubView;
 			sourceTree = "<group>";
 		};
-		D636B3A423D432D3007F370F /* DataTypes */ = {
+		B827AFEC245311790045C942 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D642BDB323A9FE4500396732 /* AppDelegate.swift */,
+				D642BDB523A9FE4500396732 /* SceneDelegate.swift */,
+				D642BDB923A9FE4500396732 /* Main.storyboard */,
+				D642BDBE23A9FE4700396732 /* LaunchScreen.storyboard */,
+				D642BDC123A9FE4700396732 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B827AFED245311930045C942 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D642BDBC23A9FE4700396732 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B827AFEE245311A90045C942 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
 				D642BDD723AA0B5700396732 /* Disk.swift */,
 			);
-			name = DataTypes;
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		D642BDA723A9FE4500396732 = {
@@ -105,15 +142,10 @@
 		D642BDB223A9FE4500396732 /* Reversi */ = {
 			isa = PBXGroup;
 			children = (
-				D642BDB323A9FE4500396732 /* AppDelegate.swift */,
-				D642BDB523A9FE4500396732 /* SceneDelegate.swift */,
-				D642BDB723A9FE4500396732 /* ViewController.swift */,
-				D642BDB923A9FE4500396732 /* Main.storyboard */,
-				D642BDBC23A9FE4700396732 /* Assets.xcassets */,
-				D642BDBE23A9FE4700396732 /* LaunchScreen.storyboard */,
-				D642BDC123A9FE4700396732 /* Info.plist */,
-				D636B3A123D43203007F370F /* Views */,
-				D636B3A423D432D3007F370F /* DataTypes */,
+				B827AFEC245311790045C942 /* App */,
+				B827AFED245311930045C942 /* Resources */,
+				B827AFE824530F610045C942 /* Modules */,
+				B827AFEE245311A90045C942 /* Domain */,
 			);
 			path = Reversi;
 			sourceTree = "<group>";
@@ -231,7 +263,7 @@
 				D636B39F23D35043007F370F /* DiskView.swift in Sources */,
 				D642BDD623AA0B3900396732 /* CellView.swift in Sources */,
 				D642BDD823AA0B5700396732 /* Disk.swift in Sources */,
-				D642BDB823A9FE4500396732 /* ViewController.swift in Sources */,
+				D642BDB823A9FE4500396732 /* BoardViewController.swift in Sources */,
 				D642BDDC23AA137C00396732 /* BoardView.swift in Sources */,
 				D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */,
 				D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */,
@@ -393,7 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Reversi/Info.plist;
+				INFOPLIST_FILE = Reversi/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -410,7 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Reversi/Info.plist;
+				INFOPLIST_FILE = Reversi/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
