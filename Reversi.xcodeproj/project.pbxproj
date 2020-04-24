@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B827AFF2245312940045C942 /* ReversiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFF1245312940045C942 /* ReversiPresenter.swift */; };
+		B8EC4FEA24531C68003FEB38 /* GameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC4FE924531C68003FEB38 /* GameInteractor.swift */; };
 		D636B39F23D35043007F370F /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636B39E23D35043007F370F /* DiskView.swift */; };
 		D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB323A9FE4500396732 /* AppDelegate.swift */; };
 		D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB523A9FE4500396732 /* SceneDelegate.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		B827AFF1245312940045C942 /* ReversiPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiPresenter.swift; sourceTree = "<group>"; };
+		B8EC4FE924531C68003FEB38 /* GameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInteractor.swift; sourceTree = "<group>"; };
 		D636B39E23D35043007F370F /* DiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskView.swift; sourceTree = "<group>"; };
 		D642BDB023A9FE4500396732 /* Reversi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reversi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D642BDB323A9FE4500396732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		B827AFEE245311A90045C942 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				B8EC4FE824531C4B003FEB38 /* Game */,
 				D642BDD723AA0B5700396732 /* Disk.swift */,
 			);
 			path = Domain;
@@ -138,6 +141,14 @@
 				B827AFF1245312940045C942 /* ReversiPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B8EC4FE824531C4B003FEB38 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				B8EC4FE924531C68003FEB38 /* GameInteractor.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		D642BDA723A9FE4500396732 = {
@@ -279,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8EC4FEA24531C68003FEB38 /* GameInteractor.swift in Sources */,
 				D636B39F23D35043007F370F /* DiskView.swift in Sources */,
 				D642BDD623AA0B3900396732 /* CellView.swift in Sources */,
 				D642BDD823AA0B5700396732 /* Disk.swift in Sources */,

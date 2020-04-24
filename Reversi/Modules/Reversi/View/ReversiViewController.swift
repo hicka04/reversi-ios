@@ -6,7 +6,8 @@ protocol ReversiView: AnyObject {
 
 class ReversiViewController: UIViewController {
     
-    lazy var presenter: ReversiPresentation = ReversiPresenter(view: self)
+    lazy var presenter: ReversiPresentation = ReversiPresenter(view: self,
+                                                               gameInteractor: GameInteractor())
     
     @IBOutlet private var boardView: BoardView!
     

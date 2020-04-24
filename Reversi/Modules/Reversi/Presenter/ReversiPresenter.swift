@@ -24,9 +24,12 @@ protocol ReversiPresentation: AnyObject {
 
 final class ReversiPresenter {
     private weak var view: ReversiView?
+    private let gameInteractor: GameUsecase
     
-    init(view: ReversiView) {
+    init(view: ReversiView,
+         gameInteractor: GameUsecase) {
         self.view = view
+        self.gameInteractor = gameInteractor
     }
 }
 
@@ -34,6 +37,7 @@ extension ReversiPresenter: ReversiPresentation {
     func viewDidLoad() {
         // ゲームをロード
         // 失敗したら新しいゲームを作成
+        gameInteractor.newGame()
     }
     
     func viewDidAppear() {
