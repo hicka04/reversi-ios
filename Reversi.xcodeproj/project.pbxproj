@@ -131,12 +131,12 @@
 			isa = PBXGroup;
 			children = (
 				B8EC4FE824531C4B003FEB38 /* Game */,
-				D642BDD723AA0B5700396732 /* Disk.swift */,
+				B8EC4FF424532772003FEB38 /* Game.swift */,
+				B8EC4FEF24532449003FEB38 /* Board.swift */,
 				B8EC4FEB24532325003FEB38 /* Cell.swift */,
 				B8EC4FED24532415003FEB38 /* Coordinate.swift */,
-				B8EC4FEF24532449003FEB38 /* Board.swift */,
+				D642BDD723AA0B5700396732 /* Disk.swift */,
 				B8EC4FF124532700003FEB38 /* Player.swift */,
-				B8EC4FF424532772003FEB38 /* Game.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
