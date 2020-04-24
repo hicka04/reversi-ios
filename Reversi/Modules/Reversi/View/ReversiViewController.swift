@@ -330,7 +330,7 @@ extension ReversiViewController {
 extension ReversiViewController {
     /// 各プレイヤーの獲得したディスクの枚数を表示します。
     func updateCountLabels() {
-        for side in Disk.sides {
+        for side in Disk.allCases {
             countLabels[side.index].text = "\(countDisks(of: side))"
         }
     }
@@ -374,7 +374,7 @@ extension ReversiViewController {
             self.animationCanceller?.cancel()
             self.animationCanceller = nil
             
-            for side in Disk.sides {
+            for side in Disk.allCases {
                 self.playerCancellers[side]?.cancel()
                 self.playerCancellers.removeValue(forKey: side)
             }
@@ -430,7 +430,7 @@ extension ReversiViewController {
     func saveGame() throws {
         var output: String = ""
         output += turn.symbol
-        for side in Disk.sides {
+        for side in Disk.allCases {
             output += playerControls[side.index].selectedSegmentIndex.description
         }
         output += "\n"
@@ -469,7 +469,7 @@ extension ReversiViewController {
         }
 
         // players
-        for side in Disk.sides {
+        for side in Disk.allCases {
             guard
                 let playerSymbol = line.popFirst(),
                 let playerNumber = Int(playerSymbol.description),
@@ -547,7 +547,7 @@ struct DiskPlacementError: Error {
 
 extension Disk {
     init(index: Int) {
-        for side in Disk.sides {
+        for side in Disk.allCases {
             if index == side.index {
                 self = side
                 return
