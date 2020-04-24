@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Cell {
+struct Cell: Hashable {
     let coordinate: Coordinate
     var disk: Disk?
 }

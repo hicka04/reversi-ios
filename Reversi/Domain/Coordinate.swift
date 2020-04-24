@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Coordinate {
+struct Coordinate: Hashable {
     let x: UInt
     let y: UInt
 }

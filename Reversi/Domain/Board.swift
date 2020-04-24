@@ -12,5 +12,5 @@ struct Board {
     let width = 8
     let height = 8
     
-    var cells: [[Cell]]
+    var cells: Set<Cell>
 }
