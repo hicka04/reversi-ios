@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B827AFF2245312940045C942 /* ReversiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFF1245312940045C942 /* ReversiPresenter.swift */; };
 		D636B39F23D35043007F370F /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636B39E23D35043007F370F /* DiskView.swift */; };
 		D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB323A9FE4500396732 /* AppDelegate.swift */; };
 		D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB523A9FE4500396732 /* SceneDelegate.swift */; };
-		D642BDB823A9FE4500396732 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB723A9FE4500396732 /* BoardViewController.swift */; };
+		D642BDB823A9FE4500396732 /* ReversiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB723A9FE4500396732 /* ReversiViewController.swift */; };
 		D642BDBB23A9FE4500396732 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D642BDB923A9FE4500396732 /* Main.storyboard */; };
 		D642BDBD23A9FE4700396732 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D642BDBC23A9FE4700396732 /* Assets.xcassets */; };
 		D642BDC023A9FE4700396732 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D642BDBE23A9FE4700396732 /* LaunchScreen.storyboard */; };
@@ -31,11 +32,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B827AFF1245312940045C942 /* ReversiPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiPresenter.swift; sourceTree = "<group>"; };
 		D636B39E23D35043007F370F /* DiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskView.swift; sourceTree = "<group>"; };
 		D642BDB023A9FE4500396732 /* Reversi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reversi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D642BDB323A9FE4500396732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D642BDB523A9FE4500396732 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D642BDB723A9FE4500396732 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		D642BDB723A9FE4500396732 /* ReversiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiViewController.swift; sourceTree = "<group>"; };
 		D642BDBA23A9FE4500396732 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D642BDBC23A9FE4700396732 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D642BDBF23A9FE4700396732 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,18 +71,18 @@
 		B827AFE824530F610045C942 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				B827AFE924530F6B0045C942 /* Board */,
+				B827AFE924530F6B0045C942 /* Reversi */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		B827AFE924530F6B0045C942 /* Board */ = {
+		B827AFE924530F6B0045C942 /* Reversi */ = {
 			isa = PBXGroup;
 			children = (
-				D642BDB723A9FE4500396732 /* BoardViewController.swift */,
-				B827AFEA24530FAF0045C942 /* SubView */,
+				B827AFEF2453126E0045C942 /* View */,
+				B827AFF02453127A0045C942 /* Presenter */,
 			);
-			path = Board;
+			path = Reversi;
 			sourceTree = "<group>";
 		};
 		B827AFEA24530FAF0045C942 /* SubView */ = {
@@ -119,6 +121,23 @@
 				D642BDD723AA0B5700396732 /* Disk.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		B827AFEF2453126E0045C942 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D642BDB723A9FE4500396732 /* ReversiViewController.swift */,
+				B827AFEA24530FAF0045C942 /* SubView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B827AFF02453127A0045C942 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B827AFF1245312940045C942 /* ReversiPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		D642BDA723A9FE4500396732 = {
@@ -263,10 +282,11 @@
 				D636B39F23D35043007F370F /* DiskView.swift in Sources */,
 				D642BDD623AA0B3900396732 /* CellView.swift in Sources */,
 				D642BDD823AA0B5700396732 /* Disk.swift in Sources */,
-				D642BDB823A9FE4500396732 /* BoardViewController.swift in Sources */,
+				D642BDB823A9FE4500396732 /* ReversiViewController.swift in Sources */,
 				D642BDDC23AA137C00396732 /* BoardView.swift in Sources */,
 				D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */,
 				D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */,
+				B827AFF2245312940045C942 /* ReversiPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

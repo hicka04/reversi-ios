@@ -1,0 +1,52 @@
+//
+//  ReversiPresenter.swift
+//  Reversi
+//
+//  Created by hicka04 on 2020/04/24.
+//  Copyright © 2020 Yuta Koshizawa. All rights reserved.
+//
+
+import Foundation
+
+struct Coordinate {
+    let x: UInt
+    let y: UInt
+}
+
+protocol ReversiPresentation: AnyObject {
+    func viewDidLoad()
+    func viewDidAppear()
+    
+    func pressResetButtonOk()
+    
+    func didSelectCell(at coordinate: Coordinate)
+}
+
+final class ReversiPresenter {
+    private weak var view: ReversiView?
+    
+    init(view: ReversiView) {
+        self.view = view
+    }
+}
+
+extension ReversiPresenter: ReversiPresentation {
+    func viewDidLoad() {
+        // ゲームをロード
+        // 失敗したら新しいゲームを作成
+    }
+    
+    func viewDidAppear() {
+        // 初回表示のときだけユーザーの入力街状態にセットする
+    }
+    
+    func pressResetButtonOk() {
+        // リセットボタンのアラートでOKが押されたら
+        // 新しいゲームを作成
+    }
+    
+    func didSelectCell(at coordinate: Coordinate) {
+        // 指定座標にdiskを置く
+        // おけない座標だったらエラー返す
+    }
+}

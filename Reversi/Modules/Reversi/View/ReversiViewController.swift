@@ -1,6 +1,13 @@
 import UIKit
 
-class BoardViewController: UIViewController {
+protocol ReversiView: AnyObject {
+    
+}
+
+class ReversiViewController: UIViewController {
+    
+    lazy var presenter: ReversiPresentation = ReversiPresenter(view: self)
+    
     @IBOutlet private var boardView: BoardView!
     
     @IBOutlet private var messageDiskView: DiskView!
@@ -37,6 +44,8 @@ class BoardViewController: UIViewController {
         } catch _ {
             newGame()
         }
+        
+        presenter.viewDidLoad()
     }
     
     private var viewHasAppeared: Bool = false
@@ -46,12 +55,18 @@ class BoardViewController: UIViewController {
         if viewHasAppeared { return }
         viewHasAppeared = true
         waitForPlayer()
+        
+        presenter.viewDidAppear()
     }
+}
+
+extension ReversiViewController: ReversiView {
+    
 }
 
 // MARK: Reversi logics
 
-extension BoardViewController {
+extension ReversiViewController {
     /// `side` で指定された色のディスクが盤上に置かれている枚数を返します。
     /// - Parameter side: 数えるディスクの色です。
     /// - Returns: `side` で指定された色のディスクの、盤上の枚数です。
@@ -222,7 +237,7 @@ extension BoardViewController {
 
 // MARK: Game management
 
-extension BoardViewController {
+extension ReversiViewController {
     /// ゲームの状態を初期化し、新しいゲームを開始します。
     func newGame() {
         boardView.reset()
@@ -311,7 +326,7 @@ extension BoardViewController {
 
 // MARK: Views
 
-extension BoardViewController {
+extension ReversiViewController {
     /// 各プレイヤーの獲得したディスクの枚数を表示します。
     func updateCountLabels() {
         for side in Disk.sides {
@@ -341,7 +356,7 @@ extension BoardViewController {
 
 // MARK: Inputs
 
-extension BoardViewController {
+extension ReversiViewController {
     /// リセットボタンが押された場合に呼ばれるハンドラーです。
     /// アラートを表示して、ゲームを初期化して良いか確認し、
     /// "OK" が選択された場合ゲームを初期化します。
@@ -385,7 +400,7 @@ extension BoardViewController {
     }
 }
 
-extension BoardViewController: BoardViewDelegate {
+extension ReversiViewController: BoardViewDelegate {
     /// `boardView` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
     /// - Parameter boardView: セルをタップされた `BoardView` インスタンスです。
     /// - Parameter x: セルの列です。
@@ -398,12 +413,14 @@ extension BoardViewController: BoardViewDelegate {
         try? placeDisk(turn, atX: x, y: y, animated: true) { [weak self] _ in
             self?.nextTurn()
         }
+        
+        presenter.didSelectCell(at: Coordinate(x: UInt(x), y: UInt(y)))
     }
 }
 
 // MARK: Save and Load
 
-extension BoardViewController {
+extension ReversiViewController {
     private var path: String {
         (NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first! as NSString).appendingPathComponent("Game")
     }
@@ -497,7 +514,7 @@ extension BoardViewController {
 
 // MARK: Additional types
 
-extension BoardViewController {
+extension ReversiViewController {
     enum Player: Int {
         case manual = 0
         case computer = 1
