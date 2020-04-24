@@ -10,6 +10,7 @@
 		B827AFF2245312940045C942 /* ReversiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFF1245312940045C942 /* ReversiPresenter.swift */; };
 		B8EC4FEA24531C68003FEB38 /* GameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC4FE924531C68003FEB38 /* GameInteractor.swift */; };
 		B8EC4FEC24532325003FEB38 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC4FEB24532325003FEB38 /* Cell.swift */; };
+		B8EC4FEE24532415003FEB38 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC4FED24532415003FEB38 /* Coordinate.swift */; };
 		D636B39F23D35043007F370F /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636B39E23D35043007F370F /* DiskView.swift */; };
 		D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB323A9FE4500396732 /* AppDelegate.swift */; };
 		D642BDB623A9FE4500396732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D642BDB523A9FE4500396732 /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 		B827AFF1245312940045C942 /* ReversiPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversiPresenter.swift; sourceTree = "<group>"; };
 		B8EC4FE924531C68003FEB38 /* GameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInteractor.swift; sourceTree = "<group>"; };
 		B8EC4FEB24532325003FEB38 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		B8EC4FED24532415003FEB38 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		D636B39E23D35043007F370F /* DiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskView.swift; sourceTree = "<group>"; };
 		D642BDB023A9FE4500396732 /* Reversi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reversi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D642BDB323A9FE4500396732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				B8EC4FE824531C4B003FEB38 /* Game */,
 				D642BDD723AA0B5700396732 /* Disk.swift */,
 				B8EC4FEB24532325003FEB38 /* Cell.swift */,
+				B8EC4FED24532415003FEB38 /* Coordinate.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				D642BDD623AA0B3900396732 /* CellView.swift in Sources */,
 				D642BDD823AA0B5700396732 /* Disk.swift in Sources */,
 				D642BDB823A9FE4500396732 /* ReversiViewController.swift in Sources */,
+				B8EC4FEE24532415003FEB38 /* Coordinate.swift in Sources */,
 				D642BDDC23AA137C00396732 /* BoardView.swift in Sources */,
 				D642BDB423A9FE4500396732 /* AppDelegate.swift in Sources */,
 				B8EC4FEC24532325003FEB38 /* Cell.swift in Sources */,

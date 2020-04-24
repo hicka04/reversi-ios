@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct Coordinate {
-    let x: UInt
-    let y: UInt
-}
-
 protocol ReversiPresentation: AnyObject {
     func viewDidLoad()
     func viewDidAppear()
