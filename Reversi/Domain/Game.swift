@@ -9,7 +9,7 @@
 import Foundation
 
 struct Game {
-    var board: Board
+    var board = Board()
     var players = (Player(disk: .dark), Player(disk: .light))
     var turn: Disk = .dark
 }

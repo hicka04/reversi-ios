@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ReversiView: AnyObject {
-    
+    func update(game: Game)
 }
 
 class ReversiViewController: UIViewController {
@@ -62,7 +62,9 @@ class ReversiViewController: UIViewController {
 }
 
 extension ReversiViewController: ReversiView {
-    
+    func update(game: Game) {
+        dump(game)
+    }
 }
 
 // MARK: Reversi logics

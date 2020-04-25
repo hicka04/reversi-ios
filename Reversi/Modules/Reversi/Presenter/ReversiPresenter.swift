@@ -32,7 +32,12 @@ extension ReversiPresenter: ReversiPresentation {
     func viewDidLoad() {
         // ゲームをロード
         // 失敗したら新しいゲームを作成
-        gameInteractor.newGame()
+        gameInteractor.new { [weak self] result in
+            switch result {
+            case .success(let game):
+                self?.view?.update(game: game)
+            }
+        }
     }
     
     func viewDidAppear() {

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameUsecase: AnyObject {
-    func newGame()
+    func new(completion: (Result<Game, Never>) -> Void)
     func resetGame()
     func saveGame()
     func loadGame()
@@ -20,8 +20,8 @@ final class GameInteractor {
 }
 
 extension GameInteractor: GameUsecase {
-    func newGame() {
-        
+    func new(completion: (Result<Game, Never>) -> Void) {
+        completion(.success(Game()))
     }
     
     func resetGame(){
