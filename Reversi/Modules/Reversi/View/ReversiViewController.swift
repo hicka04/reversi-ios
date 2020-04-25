@@ -9,11 +9,19 @@ class ReversiViewController: UIViewController {
     lazy var presenter: ReversiPresentation = ReversiPresenter(view: self,
                                                                gameInteractor: GameInteractor())
     
-    @IBOutlet private var boardView: BoardView!
+    @IBOutlet private var boardView: BoardView! {
+        didSet {
+            boardView.delegate = self
+        }
+    }
     
     @IBOutlet private var messageDiskView: DiskView!
     @IBOutlet private var messageLabel: UILabel!
-    @IBOutlet private var messageDiskSizeConstraint: NSLayoutConstraint!
+    @IBOutlet private var messageDiskSizeConstraint: NSLayoutConstraint! {
+        didSet {
+            messageDiskSize = messageDiskSizeConstraint.constant
+        }
+    }
     /// Storyboard 上で設定されたサイズを保管します。
     /// 引き分けの際は `messageDiskView` の表示が必要ないため、
     /// `messageDiskSizeConstraint.constant` を `0` に設定します。
@@ -37,15 +45,6 @@ class ReversiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        boardView.delegate = self
-        messageDiskSize = messageDiskSizeConstraint.constant
-        
-        do {
-            try loadGame()
-        } catch _ {
-            newGame()
-        }
-        
         presenter.viewDidLoad()
     }
     
@@ -63,7 +62,8 @@ class ReversiViewController: UIViewController {
 
 extension ReversiViewController: ReversiView {
     func update(game: Game) {
-        dump(game)
+        boardView.set(board: game.board)
+        dump(game.board.cells.sorted())
     }
 }
 
@@ -76,13 +76,13 @@ extension ReversiViewController {
     func countDisks(of side: Disk) -> Int {
         var count = 0
         
-        for y in boardView.yRange {
-            for x in boardView.xRange {
-                if boardView.diskAt(x: x, y: y) == side {
-                    count +=  1
-                }
-            }
-        }
+//        for y in boardView.yRange {
+//            for x in boardView.xRange {
+//                if boardView.diskAt(x: x, y: y) == side {
+//                    count +=  1
+//                }
+//            }
+//        }
         
         return count
     }
@@ -156,13 +156,13 @@ extension ReversiViewController {
     func validMoves(for side: Disk) -> [(x: Int, y: Int)] {
         var coordinates: [(Int, Int)] = []
         
-        for y in boardView.yRange {
-            for x in boardView.xRange {
-                if canPlaceDisk(side, atX: x, y: y) {
-                    coordinates.append((x, y))
-                }
-            }
-        }
+//        for y in boardView.yRange {
+//            for x in boardView.xRange {
+//                if canPlaceDisk(side, atX: x, y: y) {
+//                    coordinates.append((x, y))
+//                }
+//            }
+//        }
         
         return coordinates
     }
@@ -243,7 +243,7 @@ extension ReversiViewController {
 extension ReversiViewController {
     /// ゲームの状態を初期化し、新しいゲームを開始します。
     func newGame() {
-        boardView.reset()
+//        boardView.reset()
         turn = .dark
         
         for playerControl in playerControls {
@@ -417,7 +417,7 @@ extension ReversiViewController: BoardViewDelegate {
             self?.nextTurn()
         }
         
-        presenter.didSelectCell(at: Coordinate(x: UInt(x), y: UInt(y)))
+        presenter.didSelectCell(at: Coordinate(x: Int(x), y: Int(y)))
     }
 }
 
@@ -437,12 +437,12 @@ extension ReversiViewController {
         }
         output += "\n"
         
-        for y in boardView.yRange {
-            for x in boardView.xRange {
-                output += boardView.diskAt(x: x, y: y).symbol
-            }
-            output += "\n"
-        }
+//        for y in boardView.yRange {
+//            for x in boardView.xRange {
+//                output += boardView.diskAt(x: x, y: y).symbol
+//            }
+//            output += "\n"
+//        }
         
         do {
             try output.write(toFile: path, atomically: true, encoding: .utf8)
@@ -452,62 +452,62 @@ extension ReversiViewController {
     }
     
     /// ゲームの状態をファイルから読み込み、復元します。
-    func loadGame() throws {
-        let input = try String(contentsOfFile: path, encoding: .utf8)
-        var lines: ArraySlice<Substring> = input.split(separator: "\n")[...]
-        
-        guard var line = lines.popFirst() else {
-            throw FileIOError.read(path: path, cause: nil)
-        }
-        
-        do { // turn
-            guard
-                let diskSymbol = line.popFirst(),
-                let disk = Optional<Disk>(symbol: diskSymbol.description)
-            else {
-                throw FileIOError.read(path: path, cause: nil)
-            }
-            turn = disk
-        }
-
-        // players
-        for side in Disk.allCases {
-            guard
-                let playerSymbol = line.popFirst(),
-                let playerNumber = Int(playerSymbol.description),
-                let player = Player(rawValue: playerNumber)
-            else {
-                throw FileIOError.read(path: path, cause: nil)
-            }
-            playerControls[side.index].selectedSegmentIndex = player.rawValue
-        }
-
-        do { // board
-            guard lines.count == boardView.height else {
-                throw FileIOError.read(path: path, cause: nil)
-            }
-            
-            var y = 0
-            while let line = lines.popFirst() {
-                var x = 0
-                for character in line {
-                    let disk = Disk?(symbol: "\(character)").flatMap { $0 }
-                    boardView.setDisk(disk, atX: x, y: y, animated: false)
-                    x += 1
-                }
-                guard x == boardView.width else {
-                    throw FileIOError.read(path: path, cause: nil)
-                }
-                y += 1
-            }
-            guard y == boardView.height else {
-                throw FileIOError.read(path: path, cause: nil)
-            }
-        }
-
-        updateMessageViews()
-        updateCountLabels()
-    }
+//    func loadGame() throws {
+//        let input = try String(contentsOfFile: path, encoding: .utf8)
+//        var lines: ArraySlice<Substring> = input.split(separator: "\n")[...]
+//
+//        guard var line = lines.popFirst() else {
+//            throw FileIOError.read(path: path, cause: nil)
+//        }
+//
+//        do { // turn
+//            guard
+//                let diskSymbol = line.popFirst(),
+//                let disk = Optional<Disk>(symbol: diskSymbol.description)
+//            else {
+//                throw FileIOError.read(path: path, cause: nil)
+//            }
+//            turn = disk
+//        }
+//
+//        // players
+//        for side in Disk.allCases {
+//            guard
+//                let playerSymbol = line.popFirst(),
+//                let playerNumber = Int(playerSymbol.description),
+//                let player = Player(rawValue: playerNumber)
+//            else {
+//                throw FileIOError.read(path: path, cause: nil)
+//            }
+//            playerControls[side.index].selectedSegmentIndex = player.rawValue
+//        }
+//
+//        do { // board
+//            guard lines.count == boardView.height else {
+//                throw FileIOError.read(path: path, cause: nil)
+//            }
+//
+//            var y = 0
+//            while let line = lines.popFirst() {
+//                var x = 0
+//                for character in line {
+//                    let disk = Disk?(symbol: "\(character)").flatMap { $0 }
+//                    boardView.setDisk(disk, atX: x, y: y, animated: false)
+//                    x += 1
+//                }
+//                guard x == boardView.width else {
+//                    throw FileIOError.read(path: path, cause: nil)
+//                }
+//                y += 1
+//            }
+//            guard y == boardView.height else {
+//                throw FileIOError.read(path: path, cause: nil)
+//            }
+//        }
+//
+//        updateMessageViews()
+//        updateCountLabels()
+//    }
     
     enum FileIOError: Error {
         case write(path: String, cause: Error?)

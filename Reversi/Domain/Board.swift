@@ -9,22 +9,22 @@
 import Foundation
 
 struct Board {
-    let width: UInt = 8
-    let height: UInt = 8
+    let size: (width: Int, height: Int) = (8, 8)
+    lazy var range: (x: Range<Int>, y: Range<Int>) = (0 ..< size.width, 0 ..< size.height)
     
     var cells: Set<Cell> = []
 
     init() {
-        for y in 0 ..< height {
-            for x in 0 ..< width {
+        for y in 0 ..< size.height {
+            for x in 0 ..< size.width {
                 let disk: Disk?
                 switch (x, y) {
-                case (width / 2 - 1, height / 2 - 1),
-                     (width / 2, height / 2):
+                case (size.width / 2 - 1, size.height / 2 - 1),
+                     (size.width / 2, size.height / 2):
                     disk = .light
 
-                case (width / 2 - 1, height / 2),
-                     (width / 2, height / 2 - 1):
+                case (size.width / 2 - 1, size.height / 2),
+                     (size.width / 2, size.height / 2 - 1):
                     disk = .dark
 
                 default:

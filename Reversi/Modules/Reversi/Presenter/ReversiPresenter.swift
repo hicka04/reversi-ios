@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol ReversiPresentation: AnyObject {
     func viewDidLoad()
@@ -20,6 +21,8 @@ protocol ReversiPresentation: AnyObject {
 final class ReversiPresenter {
     private weak var view: ReversiView?
     private let gameInteractor: GameUsecase
+
+    private var cancellables: Set<AnyCancellable> = []
     
     init(view: ReversiView,
          gameInteractor: GameUsecase) {
@@ -32,12 +35,11 @@ extension ReversiPresenter: ReversiPresentation {
     func viewDidLoad() {
         // ゲームをロード
         // 失敗したら新しいゲームを作成
-        gameInteractor.new { [weak self] result in
-            switch result {
-            case .success(let game):
+        gameInteractor
+            .new()
+            .sink { [weak self] game in
                 self?.view?.update(game: game)
-            }
-        }
+            }.store(in: &cancellables)
     }
     
     func viewDidAppear() {

@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol GameUsecase: AnyObject {
-    func new(completion: (Result<Game, Never>) -> Void)
+    func new() -> AnyPublisher<Game, Never>
     func resetGame()
     func saveGame()
     func loadGame()
@@ -20,8 +21,8 @@ final class GameInteractor {
 }
 
 extension GameInteractor: GameUsecase {
-    func new(completion: (Result<Game, Never>) -> Void) {
-        completion(.success(Game()))
+    func new() -> AnyPublisher<Game, Never> {
+        Just(Game()).eraseToAnyPublisher()
     }
     
     func resetGame(){

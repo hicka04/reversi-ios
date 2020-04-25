@@ -9,6 +9,6 @@
 import Foundation
 
 struct Coordinate: Hashable {
-    let x: UInt
-    let y: UInt
+    let x: Int
+    let y: Int
 }
