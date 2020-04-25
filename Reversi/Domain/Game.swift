@@ -9,12 +9,7 @@
 import Foundation
 
 struct Game {
-    enum Turn {
-        case first
-        case second
-    }
-    
     var board: Board
     var players = (Player(disk: .dark), Player(disk: .light))
-    var turn: Turn = .first
+    var turn: Disk = .dark
 }
