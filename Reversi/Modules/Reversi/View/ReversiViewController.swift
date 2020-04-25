@@ -383,6 +383,8 @@ extension ReversiViewController {
             
             self.newGame()
             self.waitForPlayer()
+
+            self.presenter.pressResetButtonOk()
         })
         present(alertController, animated: true)
     }
