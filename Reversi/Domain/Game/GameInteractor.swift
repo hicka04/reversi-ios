@@ -11,9 +11,7 @@ import Combine
 
 protocol GameUsecase: AnyObject {
     func new() -> AnyPublisher<Game, Never>
-    func resetGame()
-    func saveGame()
-    func loadGame()
+    func load() -> AnyPublisher<Game, Never>
 }
 
 final class GameInteractor {
@@ -25,15 +23,7 @@ extension GameInteractor: GameUsecase {
         Just(Game()).eraseToAnyPublisher()
     }
     
-    func resetGame(){
-        
-    }
-    
-    func saveGame(){
-        
-    }
-    
-    func loadGame(){
-        
+    func load() -> AnyPublisher<Game, Never> {
+        new()
     }
 }

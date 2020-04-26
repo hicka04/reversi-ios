@@ -2,14 +2,21 @@ import UIKit
 
 private let lineWidth: CGFloat = 2
 
-public class BoardView: UIView {
+protocol BoardViewDelegate: AnyObject {
+    /// `boardView` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
+    /// - Parameter boardView: セルをタップされた `BoardView` インスタンスです。
+    /// - Parameter coordinate: セルの座標です。
+    func boardView(_ boardView: BoardView, didSelectCellAt coordinate: Coordinate)
+}
+
+class BoardView: UIView {
     private var board: Board!
 
     private var cellViews: [CellView] = []
     private var actions: [CellSelectionAction] = []
 
     /// セルがタップされたときの挙動を移譲するためのオブジェクトです。
-    public weak var delegate: BoardViewDelegate?
+    weak var delegate: BoardViewDelegate?
 
     func set(board: Board) {
         self.board = board
@@ -94,7 +101,7 @@ public class BoardView: UIView {
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
     /// - Returns: セルにディスクが置かれている場合はそのディスクの値を、置かれていない場合は `nil` を返します。
-    public func diskAt(x: Int, y: Int) -> Disk? {
+    func diskAt(x: Int, y: Int) -> Disk? {
         cellViewAt(x: x, y: y)?.disk
     }
     
@@ -108,20 +115,12 @@ public class BoardView: UIView {
     /// - Parameter completion: アニメーションの完了通知を受け取るハンドラーです。
     ///     `animated` に `false` が指定された場合は状態が変更された後で即座に同期的に呼び出されます。
     ///     ハンドラーが受け取る `Bool` 値は、 `UIView.animate()`  等に準じます。
-    public func setDisk(_ disk: Disk?, atX x: Int, y: Int, animated: Bool, completion: ((Bool) -> Void)? = nil) {
+    func setDisk(_ disk: Disk?, atX x: Int, y: Int, animated: Bool, completion: ((Bool) -> Void)? = nil) {
         guard let cellView = cellViewAt(x: x, y: y) else {
             preconditionFailure() // FIXME: Add a message.
         }
         cellView.setDisk(disk, animated: animated, completion: completion)
     }
-}
-
-public protocol BoardViewDelegate: AnyObject {
-    /// `boardView` の `x`, `y` で指定されるセルがタップされたときに呼ばれます。
-    /// - Parameter boardView: セルをタップされた `BoardView` インスタンスです。
-    /// - Parameter x: セルの列です。
-    /// - Parameter y: セルの行です。
-    func boardView(_ boardView: BoardView, didSelectCellAtX x: Int, y: Int)
 }
 
 private class CellSelectionAction: NSObject {
@@ -137,6 +136,6 @@ private class CellSelectionAction: NSObject {
     
     @objc func selectCell() {
         guard let boardView = boardView else { return }
-        boardView.delegate?.boardView(boardView, didSelectCellAtX: x, y: y)
+        boardView.delegate?.boardView(boardView, didSelectCellAt: Coordinate(x: x, y: y))
     }
 }

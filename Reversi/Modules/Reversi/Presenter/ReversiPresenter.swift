@@ -36,7 +36,7 @@ extension ReversiPresenter: ReversiPresentation {
         // ゲームをロード
         // 失敗したら新しいゲームを作成
         gameInteractor
-            .new()
+            .load()
             .sink { [weak self] game in
                 self?.view?.update(game: game)
             }.store(in: &cancellables)
@@ -59,5 +59,6 @@ extension ReversiPresenter: ReversiPresentation {
     func didSelectCell(at coordinate: Coordinate) {
         // 指定座標にdiskを置く
         // おけない座標だったらエラー返す
+        
     }
 }

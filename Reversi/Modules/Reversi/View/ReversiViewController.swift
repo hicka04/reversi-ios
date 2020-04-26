@@ -245,17 +245,17 @@ extension ReversiViewController {
     func newGame() {
 //        boardView.reset()
         turn = .dark
-        
+
         for playerControl in playerControls {
             playerControl.selectedSegmentIndex = Player.manual.rawValue
         }
 
         updateMessageViews()
         updateCountLabels()
-        
+
         try? saveGame()
     }
-    
+
     /// プレイヤーの行動を待ちます。
     func waitForPlayer() {
         guard let turn = self.turn else { return }
@@ -410,16 +410,16 @@ extension ReversiViewController: BoardViewDelegate {
     /// - Parameter boardView: セルをタップされた `BoardView` インスタンスです。
     /// - Parameter x: セルの列です。
     /// - Parameter y: セルの行です。
-    func boardView(_ boardView: BoardView, didSelectCellAtX x: Int, y: Int) {
+    func boardView(_ boardView: BoardView, didSelectCellAt coordinate: Coordinate) {
         guard let turn = turn else { return }
         if isAnimating { return }
         guard case .manual = Player(rawValue: playerControls[turn.index].selectedSegmentIndex)! else { return }
         // try? because doing nothing when an error occurs
-        try? placeDisk(turn, atX: x, y: y, animated: true) { [weak self] _ in
+        try? placeDisk(turn, atX: coordinate.x, y: coordinate.y, animated: true) { [weak self] _ in
             self?.nextTurn()
         }
         
-        presenter.didSelectCell(at: Coordinate(x: Int(x), y: Int(y)))
+        presenter.didSelectCell(at: coordinate)
     }
 }
 
