@@ -35,7 +35,7 @@ class ReversiViewController: UIViewController {
     @IBOutlet private var playerActivityIndicators: [UIActivityIndicatorView]!
     
     /// どちらの色のプレイヤーのターンかを表します。ゲーム終了時は `nil` です。
-    private var turn: Disk? = .dark
+    private var turn: Disk?
     
     private var animationCanceller: Canceller?
     private var isAnimating: Bool { animationCanceller != nil }
@@ -63,6 +63,10 @@ class ReversiViewController: UIViewController {
 extension ReversiViewController: ReversiView {
     func update(game: Game) {
         boardView.set(board: game.board)
+        turn = game.turn
+        for (playerControl, mode) in zip(playerControls, game.players.map { $0.mode }) {
+            playerControl.selectedSegmentIndex = mode.rawValue
+        }
         dump(game.board.cells.sorted())
     }
 }
@@ -243,12 +247,6 @@ extension ReversiViewController {
 extension ReversiViewController {
     /// ゲームの状態を初期化し、新しいゲームを開始します。
     func newGame() {
-//        boardView.reset()
-        turn = .dark
-
-        for playerControl in playerControls {
-            playerControl.selectedSegmentIndex = Player.manual.rawValue
-        }
 
         updateMessageViews()
         updateCountLabels()
@@ -372,6 +370,8 @@ extension ReversiViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in })
         alertController.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             guard let self = self else { return }
+
+            self.presenter.pressResetButtonOk()
             
             self.animationCanceller?.cancel()
             self.animationCanceller = nil
@@ -383,8 +383,6 @@ extension ReversiViewController {
             
             self.newGame()
             self.waitForPlayer()
-
-            self.presenter.pressResetButtonOk()
         })
         present(alertController, animated: true)
     }

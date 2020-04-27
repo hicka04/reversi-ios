@@ -9,9 +9,9 @@
 import Foundation
 
 struct Player {
-    enum Mode {
-        case manual
-        case auto
+    enum Mode: Int {
+        case manual = 0
+        case auto = 1
     }
     
     var mode: Mode = .manual
