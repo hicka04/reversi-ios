@@ -430,25 +430,6 @@ extension ReversiViewController {
     
     /// ゲームの状態をファイルに書き出し、保存します。
     func saveGame() throws {
-        var output: String = ""
-        output += turn.symbol
-        for side in Disk.allCases {
-            output += playerControls[side.index].selectedSegmentIndex.description
-        }
-        output += "\n"
-        
-//        for y in boardView.yRange {
-//            for x in boardView.xRange {
-//                output += boardView.diskAt(x: x, y: y).symbol
-//            }
-//            output += "\n"
-//        }
-        
-        do {
-            try output.write(toFile: path, atomically: true, encoding: .utf8)
-        } catch let error {
-            throw FileIOError.read(path: path, cause: error)
-        }
     }
     
     /// ゲームの状態をファイルから読み込み、復元します。
@@ -562,32 +543,6 @@ extension Disk {
         switch self {
         case .dark: return 0
         case .light: return 1
-        }
-    }
-}
-
-extension Optional where Wrapped == Disk {
-    fileprivate init?<S: StringProtocol>(symbol: S) {
-        switch symbol {
-        case "x":
-            self = .some(.dark)
-        case "o":
-            self = .some(.light)
-        case "-":
-            self = .none
-        default:
-            return nil
-        }
-    }
-    
-    fileprivate var symbol: String {
-        switch self {
-        case .some(.dark):
-            return "x"
-        case .some(.light):
-            return "o"
-        case .none:
-            return "-"
         }
     }
 }

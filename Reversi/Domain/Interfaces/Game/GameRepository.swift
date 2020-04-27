@@ -16,5 +16,5 @@ enum FileIOError: Error {
 
 protocol GameRepository {
     func load() -> AnyPublisher<Game, FileIOError>
-    func save() -> AnyPublisher<Void, FileIOError>
+    func save(game: Game) -> AnyPublisher<Game, FileIOError>
 }

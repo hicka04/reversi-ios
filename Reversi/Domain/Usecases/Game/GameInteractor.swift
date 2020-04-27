@@ -24,7 +24,12 @@ final class GameInteractor {
 
 extension GameInteractor: GameUsecase {
     func reset() -> AnyPublisher<Game, Never> {
-        Just(Game()).eraseToAnyPublisher()
+        Just(Game())
+            .flatMap { game in
+                self.dataStore
+                    .save(game: game)
+                    .catch { _ in Just(game) }
+            }.eraseToAnyPublisher()
     }
     
     func load() -> AnyPublisher<Game, Never> {
