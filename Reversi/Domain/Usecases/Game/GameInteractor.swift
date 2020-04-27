@@ -10,20 +10,27 @@ import Foundation
 import Combine
 
 protocol GameUsecase: AnyObject {
-    func new() -> AnyPublisher<Game, Never>
+    func reset() -> AnyPublisher<Game, Never>
     func load() -> AnyPublisher<Game, Never>
 }
 
 final class GameInteractor {
-    
+    private let dataStore: GameRepository
+
+    init(dataStore: GameRepository = GameDataStore()) {
+        self.dataStore = dataStore
+    }
 }
 
 extension GameInteractor: GameUsecase {
-    func new() -> AnyPublisher<Game, Never> {
+    func reset() -> AnyPublisher<Game, Never> {
         Just(Game()).eraseToAnyPublisher()
     }
     
     func load() -> AnyPublisher<Game, Never> {
-        new()
+        dataStore
+            .load()
+            .catch { _ in self.reset() }
+            .eraseToAnyPublisher()
     }
 }

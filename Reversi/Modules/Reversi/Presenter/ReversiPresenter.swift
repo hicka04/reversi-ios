@@ -50,7 +50,7 @@ extension ReversiPresenter: ReversiPresentation {
         // リセットボタンのアラートでOKが押されたら
         // 新しいゲームを作成
         gameInteractor
-            .new()
+            .reset()
             .sink { [weak self] game in
                 self?.view?.update(game: game)
             }.store(in: &cancellables)
