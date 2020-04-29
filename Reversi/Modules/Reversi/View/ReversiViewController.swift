@@ -424,75 +424,8 @@ extension ReversiViewController: BoardViewDelegate {
 // MARK: Save and Load
 
 extension ReversiViewController {
-    private var path: String {
-        (NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first! as NSString).appendingPathComponent("Game")
-    }
-    
     /// ゲームの状態をファイルに書き出し、保存します。
     func saveGame() throws {
-    }
-    
-    /// ゲームの状態をファイルから読み込み、復元します。
-//    func loadGame() throws {
-//        let input = try String(contentsOfFile: path, encoding: .utf8)
-//        var lines: ArraySlice<Substring> = input.split(separator: "\n")[...]
-//
-//        guard var line = lines.popFirst() else {
-//            throw FileIOError.read(path: path, cause: nil)
-//        }
-//
-//        do { // turn
-//            guard
-//                let diskSymbol = line.popFirst(),
-//                let disk = Optional<Disk>(symbol: diskSymbol.description)
-//            else {
-//                throw FileIOError.read(path: path, cause: nil)
-//            }
-//            turn = disk
-//        }
-//
-//        // players
-//        for side in Disk.allCases {
-//            guard
-//                let playerSymbol = line.popFirst(),
-//                let playerNumber = Int(playerSymbol.description),
-//                let player = Player(rawValue: playerNumber)
-//            else {
-//                throw FileIOError.read(path: path, cause: nil)
-//            }
-//            playerControls[side.index].selectedSegmentIndex = player.rawValue
-//        }
-//
-//        do { // board
-//            guard lines.count == boardView.height else {
-//                throw FileIOError.read(path: path, cause: nil)
-//            }
-//
-//            var y = 0
-//            while let line = lines.popFirst() {
-//                var x = 0
-//                for character in line {
-//                    let disk = Disk?(symbol: "\(character)").flatMap { $0 }
-//                    boardView.setDisk(disk, atX: x, y: y, animated: false)
-//                    x += 1
-//                }
-//                guard x == boardView.width else {
-//                    throw FileIOError.read(path: path, cause: nil)
-//                }
-//                y += 1
-//            }
-//            guard y == boardView.height else {
-//                throw FileIOError.read(path: path, cause: nil)
-//            }
-//        }
-//
-//        updateMessageViews()
-//        updateCountLabels()
-//    }
-    
-    enum FileIOError: Error {
-        case write(path: String, cause: Error?)
-        case read(path: String, cause: Error?)
     }
 }
 

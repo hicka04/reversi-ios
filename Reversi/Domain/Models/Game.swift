@@ -12,4 +12,10 @@ struct Game {
     var board = Board()
     var players = [Player(disk: .dark), Player(disk: .light)]
     var turn: Disk? = .dark
+    
+    mutating func updatePlayerMode(_ mode: Player.Mode, of disk: Disk) {
+        for i in 0 ..< players.count where players[i].disk == disk {
+            players[i].mode = mode
+        }
+    }
 }

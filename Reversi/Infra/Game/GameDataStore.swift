@@ -17,7 +17,68 @@ extension GameDataStore: GameRepository {
     func load() -> AnyPublisher<Game, FileIOError> {
         Deferred {
             Future { promise in
-                promise(.success(Game()))
+                var game = Game()
+                
+                guard let input = try? String(contentsOfFile: self.path, encoding: .utf8) else {
+                    promise(.failure(FileIOError.read(path: self.path, cause: nil)))
+                    return
+                }
+                var lines: ArraySlice<Substring> = input.split(separator: "\n")[...]
+
+                guard var line = lines.popFirst() else {
+                    promise(.failure(FileIOError.read(path: self.path, cause: nil)))
+                    return
+                }
+
+                // trun
+                guard
+                    let diskSymbol = line.popFirst(),
+                    let disk = Optional<Disk>(symbol: diskSymbol.description)
+                else {
+                    promise(.failure(FileIOError.read(path: self.path, cause: nil)))
+                    return
+                }
+                game.turn = disk
+                
+                // players
+                game.players.forEach { player in
+                    guard
+                        let playerSymbol = line.popFirst(),
+                        let playerNumber = Int(playerSymbol.description)
+                    else {
+                        return
+                    }
+                    
+                    let mode = Player.Mode(rawValue: playerNumber) ?? .manual
+                    game.updatePlayerMode(mode, of: player.disk)
+                }
+                
+                // board
+                guard lines.count == game.board.size.height else {
+                    promise(.failure(FileIOError.read(path: self.path, cause: nil)))
+                    return
+                }
+                
+                var y = 0
+                while let line = lines.popFirst() {
+                    var x = 0
+                    for character in line {
+                        let disk = Disk?(symbol: "\(character)").flatMap { $0 }
+                        game.board.updateDisk(disk, at: Coordinate(x: x, y: y))
+                        x += 1
+                    }
+                    guard x == game.board.size.width else {
+                        promise(.failure(FileIOError.read(path: self.path, cause: nil)))
+                        return
+                    }
+                    y += 1
+                }
+                guard y == game.board.size.height else {
+                    promise(.failure(FileIOError.read(path: self.path, cause: nil)))
+                    return
+                }
+                
+                promise(.success(game))
             }
         }.eraseToAnyPublisher()
     }
@@ -38,6 +99,7 @@ extension GameDataStore: GameRepository {
                         let coordinate = Coordinate(x: x, y: y)
                         output += game.board.cells.first { $0.coordinate == coordinate }!.disk.symbol
                     }
+                    output += "\n"
                 }
 
                 do {

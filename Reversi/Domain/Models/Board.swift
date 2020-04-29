@@ -34,4 +34,10 @@ struct Board {
             }
         }
     }
+    
+    mutating func updateDisk(_ disk: Disk?, at coordinate: Coordinate) {
+        var cells = self.cells.filter { $0.coordinate != coordinate }
+        cells.insert(Cell(coordinate: coordinate, disk: disk))
+        self.cells = cells
+    }
 }
